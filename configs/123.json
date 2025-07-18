@@ -1,0 +1,29 @@
+{
+  "visuals": {
+    "box": true,
+    "platform": true,
+    "username": false,
+    "killcount": false,
+    "weapon": false,
+    "skeleton": false
+  },
+  "aimbot": {
+    "aim_enable": false,
+    "show_fov": true,
+    "fov": 278,
+    "smoothness": 14.4,
+    "visible_check": true,
+    "current_key": 2,
+    "fovarrows": true
+  },
+  "triggerbot": {
+    "triggerbot": false,
+    "triggerbot_enable": true,
+    "delay": 1.3,
+    "distance": 50,
+    "key": 2
+  },
+  "exploits": {
+    "wallbang": true
+  }
+}

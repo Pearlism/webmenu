@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portal ig</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .top-bar {
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+      border-bottom: 2px solid #333;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .top-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .connection-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00ff00;
+      box-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0, 255, 0, 0.5);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0, 255, 0, 0.5); }
+      50% { box-shadow: 0 0 15px #00ff00, 0 0 30px rgba(0, 255, 0, 0.8); }
+      100% { box-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0, 255, 0, 0.5); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .uid-info {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #cccccc;
+      font-size: 16px;
+    }
+
+    #uid-label {
+      color: #ffffff;
+      font-weight: bold;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      padding: 4px 12px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    fieldset {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    fieldset::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    }
+
+    legend {
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-weight: bold;
+      font-size: 16px;
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    legend::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      border-radius: 25px 25px 0 0;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0;
+      color: #e0e0e0;
+      font-size: 14px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    label:hover {
+      color: #ffffff;
+    }
+
+    .slider-label {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-right: 10px;
+      cursor: pointer;
+      position: relative;
+      appearance: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    input[type="checkbox"]:checked {
+      background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+      border-color: #00ff00;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+
+    input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #000000;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      height: 6px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      transform: scale(1.1);
+    }
+
+    input[type="number"] {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #ffffff;
+      font-size: 14px;
+      width: 100px;
+      transition: all 0.3s ease;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #00ff00;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+
+    .slider-value {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      padding: 6px 12px;
+      color: #ffffff;
+      font-weight: bold;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .save-section {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .save-button {
+      background: linear-gradient(135deg, #484d48a9 0%, #00cc00 100%);
+      color: #000000;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .save-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    }
+
+    .save-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 255, 0, 0.5);
+    }
+
+    .save-button:active {
+      transform: translateY(0);
+    }
+
+    #status {
+      margin-left: 20px;
+      font-size: 16px;
+      color: #00ff00;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100%);
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="brand">landen2rich</div>
+    <div class="connection-status">
+      <div class="status-dot"></div>
+      <span>Connected</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Portal ig</h1>
+    <div class="uid-info">
+      Configuring for UID: <span id="uid-label"></span>
+    </div>
+
+    <form id="config-form">
+      <div class="form-grid">
+        <fieldset>
+          <legend>Visuals</legend>
+          <label><input type="checkbox" id="box"> Box</label>
+          <label><input type="checkbox" id="platform"> Platform</label>
+          <label><input type="checkbox" id="username"> Username</label>
+          <label><input type="checkbox" id="killcount"> Kill Count</label>
+          <label><input type="checkbox" id="weapon"> Weapon</label>
+          <label><input type="checkbox" id="skeleton"> Skeleton</label>
+        </fieldset>
+        
+        <fieldset>
+          <legend>Aimbot</legend>
+          <label><input type="checkbox" id="aim_enable"> Enable</label>
+          <label><input type="checkbox" id="show_fov"> Show FOV</label>
+          
+          <label class="slider-label">
+            FOV:
+            <input type="range" id="fov" min="0" max="360" step="1" value="160">
+            <span class="slider-value" id="fov-value">160</span>
+          </label>
+
+          <label class="slider-label">
+            Smoothness:
+            <input type="range" id="smoothness" min="0" max="20" step="0.1" value="9">
+            <span class="slider-value" id="smoothness-value">9</span>
+          </label>
+
+          <label><input type="checkbox" id="visible_check"> Visible Check</label>
+          <label>Current Key (VK code): <input type="number" id="current_key"></label>
+          <label><input type="checkbox" id="fovarrows"> FOV Arrows</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Triggerbot</legend>
+          <label><input type="checkbox" id="triggerbot"> Triggerbot</label>
+          <label><input type="checkbox" id="triggerbot_enable"> Enable</label>
+          <label class="slider-label">
+            Delay (sec):
+            <input type="range" id="delay" min="0" max="5" step="0.1" value="1.3">
+            <span class="slider-value" id="delay-value">1.3</span>
+          </label>
+          <label class="slider-label">
+            Distance:
+            <input type="range" id="distance" min="0" max="200" step="1" value="50">
+            <span class="slider-value" id="distance-value">50</span>
+          </label>
+          <label>Key (VK code): <input type="number" id="key"></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Exploits</legend>
+          <label><input type="checkbox" id="wallbang"> Wallbang</label>
+        </fieldset>
+      </div>
+
+      <div class="save-section">
+        <button type="button" class="save-button" onclick="saveConfig()">💾 Save Configuration</button>
+        <span id="status"></span>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const uid = new URLSearchParams(window.location.search).get('uid');
+    if (!uid) {
+      document.body.innerHTML = '<p style="color:red;">No UID specified. Use ?uid=YOUR_UID in the URL.</p>';
+      throw new Error('UID missing');
+    }
+    document.getElementById('uid-label').innerText = uid;
+
+    const schema = {
+      visuals: ['box','platform','username','killcount','weapon','skeleton'],
+      aimbot: ['aim_enable','show_fov','fov','smoothness','visible_check','current_key','fovarrows'],
+      triggerbot: ['triggerbot','triggerbot_enable','delay','distance','key'],
+      exploits: ['wallbang']
+    };
+
+    function loadConfig(cfg) {
+      for (let ns in schema) {
+        schema[ns].forEach(field => {
+          const el = document.getElementById(field);
+          const val = cfg[ns][field];
+          if (typeof el === 'undefined') return;
+          if (el.type === 'checkbox') el.checked = !!val;
+          else el.value = (Array.isArray(val) ? val.join(',') : val);
+        });
+      }
+    }
+
+    function setupSlider(id) {
+      const slider = document.getElementById(id);
+      const display = document.getElementById(id + '-value');
+      if (slider && display) {
+        display.textContent = slider.value;
+        slider.addEventListener('input', () => {
+          display.textContent = slider.value;
+        });
+      }
+    }
+    ['fov', 'smoothness', 'delay', 'distance'].forEach(setupSlider);
+
+    fetch('/config/' + uid)
+      .then(r => r.json())
+      .then(cfg => loadConfig(cfg))
+      .catch(err => console.error('Failed to load config:', err));
+
+    function saveConfig() {
+      const payload = {};
+      for (let ns in schema) {
+        payload[ns] = {};
+        schema[ns].forEach(field => {
+          const el = document.getElementById(field);
+          if (!el) return;
+          let val;
+          if (el.type === 'checkbox') val = el.checked;
+          else if (field === 'namecolor' || field === 'skelcol')
+            val = el.value.split(',').map(n => parseFloat(n));
+          else
+            val = parseFloat(el.value);
+          payload[ns][field] = val;
+        });
+      }
+
+      fetch('/config/' + uid, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(resp => resp.json())
+        .then(res => {
+          document.getElementById('status').innerText = 'Saved ✔️';
+          setTimeout(() => (document.getElementById('status').innerText = ''), 2000);
+        })
+        .catch(err => { alert('Save failed'); console.error(err) });
+    }
+  </script>
+</body>
+</html>
