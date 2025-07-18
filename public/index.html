@@ -452,31 +452,49 @@
     .uid-value {
       font-weight: bold;
       color: #00ff00;
-      font-family: 'Courier New', monospace;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.subtext {
+  font-size: 12px;
+  font-weight: normal;
+  color: gray;
+  margin-top: -2px;
+}
+
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="header-content">
-        <div class="logo">landen2rich</div>
-        <div class="status">
-          <div class="status-dot"></div>
-          <span>Connected</span>
-        </div>
+<div class="container">
+  <div class="header">
+    <div class="header-content">
+      <div class="logo">
+        landen2rich
+        <span class="subtext">discord.gg/landen2rich</span>
+      </div>
+      <div class="status">
+        <div class="status-dot"></div>
+        <span>Server Online</span>
       </div>
     </div>
+  </div>
     <div class="uid-section" id="uid-section">
-      <h2>Portal IG Configuration</h2>
-      <p>Enter your UID to access the configuration panel</p>
+      <h2>UID Login</h2>
+      <p>Enter your UID to access the menu</p>
       <input type="text" class="uid-input" id="uid-input" placeholder="Enter your UID...">
       <br>
       <button class="connect-btn" onclick="connectWithUID()">🔗 Connect</button>
     </div>
 
     <div class="current-uid" id="current-uid" style="display: none;">
-      Configuring for UID: <span class="uid-value" id="uid-label"></span>
+      Menu for UID: <span class="uid-value" id="uid-label"></span>
     </div>
 
     <form class="config-form" id="config-form">
@@ -525,11 +543,6 @@
             <span id="distance-value">50</span>
           </label>
           <label>Trigger Key (VK): <input type="number" id="key" value="2"></label>
-        </fieldset>
-
-        <fieldset>
-          <legend>Exploits</legend>
-          <label><input type="checkbox" id="wallbang"> Wallbang</label>
         </fieldset>
 
         <fieldset>
