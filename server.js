@@ -19,7 +19,7 @@ app.get('/config/:uid', (req, res) => {
         platform: true,
         username: true,
         killcount: true,
-        weapon: true,
+        weaponesp: true,
         skeleton: true
       },
       aimbot: {
