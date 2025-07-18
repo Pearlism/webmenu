@@ -16,6 +16,7 @@
       color: #ffffff;
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
     }
 
     .top-bar {
@@ -27,6 +28,18 @@
       gap: 15px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
       position: relative;
+      animation: slideInFromTop 0.6s ease-out;
+    }
+
+    @keyframes slideInFromTop {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .top-bar::before {
@@ -47,6 +60,16 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+      to {
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+      }
     }
 
     .connection-status {
@@ -57,6 +80,18 @@
       padding: 8px 16px;
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .status-dot {
@@ -78,6 +113,18 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 30px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     h1 {
@@ -89,6 +136,18 @@
       background-clip: text;
       text-align: center;
       text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      animation: slideInFromLeft 0.8s ease-out 0.3s both;
+    }
+
+    @keyframes slideInFromLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .uid-info {
@@ -96,6 +155,7 @@
       margin-bottom: 30px;
       color: #cccccc;
       font-size: 16px;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
     }
 
     #uid-label {
@@ -105,6 +165,7 @@
       padding: 4px 12px;
       border-radius: 15px;
       border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
     }
 
     .form-grid {
@@ -121,6 +182,24 @@
       padding: 25px;
       position: relative;
       overflow: hidden;
+      animation: scaleIn 0.6s ease-out;
+      transition: all 0.3s ease;
+    }
+
+    fieldset:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     fieldset::before {
@@ -143,6 +222,7 @@
       font-size: 16px;
       position: relative;
       margin-bottom: 15px;
+      animation: fadeIn 0.8s ease-out;
     }
 
     legend::before {
@@ -162,11 +242,13 @@
       color: #e0e0e0;
       font-size: 14px;
       cursor: pointer;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease-out;
     }
 
     label:hover {
       color: #ffffff;
+      transform: translateX(5px);
     }
 
     .slider-label {
@@ -193,6 +275,13 @@
       background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
       border-color: #00ff00;
       box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+      animation: checkboxPulse 0.3s ease-out;
+    }
+
+    @keyframes checkboxPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
 
     input[type="checkbox"]:checked::after {
@@ -215,6 +304,7 @@
       cursor: pointer;
       appearance: none;
       border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
     }
 
     input[type="range"]::-webkit-slider-thumb {
@@ -248,6 +338,7 @@
       outline: none;
       border-color: #00ff00;
       box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+      transform: scale(1.05);
     }
 
     .slider-value {
@@ -259,11 +350,13 @@
       font-weight: bold;
       min-width: 50px;
       text-align: center;
+      transition: all 0.3s ease;
     }
 
     .save-section {
       text-align: center;
       margin-top: 30px;
+      animation: fadeInUp 1s ease-out 0.5s both;
     }
 
     .save-button {
@@ -298,6 +391,13 @@
 
     .save-button:active {
       transform: translateY(0);
+      animation: buttonPress 0.1s ease-out;
+    }
+
+    @keyframes buttonPress {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.95); }
+      100% { transform: scale(1); }
     }
 
     #status {
@@ -306,9 +406,129 @@
       color: #00ff00;
       font-weight: bold;
       text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+      animation: fadeIn 0.5s ease-out;
     }
 
-    /* Scrollbar styling */
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .login-box {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      animation: scaleIn 0.8s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    }
+
+    .login-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .login-subtitle {
+      color: #cccccc;
+      margin-bottom: 30px;
+      font-size: 16px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .login-input {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      padding: 15px 20px;
+      color: #ffffff;
+      font-size: 16px;
+      width: 300px;
+      margin-bottom: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .login-input:focus {
+      outline: none;
+      border-color: #00ff00;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+      transform: scale(1.05);
+    }
+
+    .login-input::placeholder {
+      color: #999999;
+    }
+
+    .login-button {
+      background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+      color: #000000;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .login-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 255, 0, 0.5);
+    }
+
+    .login-button:active {
+      transform: translateY(0);
+      animation: buttonPress 0.1s ease-out;
+    }
+
+    .watermark {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+      font-weight: 300;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 5px 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 2s ease-out 1s both;
+      transition: all 0.3s ease;
+    }
+
+    .watermark:hover {
+      color: rgba(255, 255, 255, 0.8);
+      transform: scale(1.05);
+    }
+
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -328,6 +548,8 @@
   </style>
 </head>
 <body>
+  <div class="watermark">made by landen2rich</div>
+  
   <div class="top-bar">
     <div class="brand">landen2rich</div>
     <div class="connection-status">
@@ -407,11 +629,33 @@
   </div>
 
   <script>
-    const uid = new URLSearchParams(window.location.search).get('uid');
-    if (!uid) {
-      document.body.innerHTML = '<p style="color:red;">No UID specified. Use ?uid=YOUR_UID in the URL.</p>';
-      throw new Error('UID missing');
+  const uid = new URLSearchParams(window.location.search).get('uid');
+
+  if (!uid) {
+    document.body.innerHTML = `
+      <div class="watermark">made by landen2rich</div>
+      <div class="login-container">
+        <div class="login-box">
+          <h3 class="login-title">Access Required</h3>
+          <p class="login-subtitle">Enter your UID below to access your configuration:</p>
+          <input type="text" id="uidInput" placeholder="Enter your UID" class="login-input" />
+          <br>
+          <button onclick="redirectWithUID()" class="login-button">Submit</button>
+        </div>
+      </div>
+    `;
+
+    function redirectWithUID() {
+      const inputUid = document.getElementById('uidInput').value.trim();
+      if (!inputUid) {
+        alert('Please enter a valid UID.');
+        return;
+      }
+      window.location.href = window.location.pathname + '?uid=' + encodeURIComponent(inputUid);
     }
+
+    throw new Error('UID missing');
+  }
     document.getElementById('uid-label').innerText = uid;
 
     const schema = {
