@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Portal ig - landen2rich</title>
+  <title>landen2rich Portal</title>
   <style>
     * {
       margin: 0;
@@ -485,14 +485,16 @@
       </div>
     </div>
   </div>
-    <div class="uid-section" id="uid-section">
-      <h2>UID Login</h2>
-      <p>Enter your UID to access the menu</p>
-      <input type="text" class="uid-input" id="uid-input" placeholder="Enter your UID...">
-      <br>
-      <button class="connect-btn" onclick="connectWithUID()">🔗 Connect</button>
-    </div>
-
+<div class="uid-section" id="uid-section">
+  <h2>UID Login</h2>
+  <div style="margin-bottom: 10px;">
+    <p style="margin: 0;">Get your UID from the Console</p>
+    <small style="color: #aaa;">Example: landen2rich-46536600</small>
+  </div>
+  <input type="text" class="uid-input" id="uid-input" placeholder="Enter your UID...">
+  <br>
+  <button class="connect-btn" onclick="connectWithUID()">🔗 Connect</button>
+</div>
     <div class="current-uid" id="current-uid" style="display: none;">
       Menu for UID: <span class="uid-value" id="uid-label"></span>
     </div>
