@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <title>landen2rich Portal</title>
   <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css" />
   <script disable-devtool-auto="" src="dis.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css" />
   <style>
     * {
       margin: 0;
@@ -651,31 +651,29 @@
     }
 
     .current-uid {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 15px;
       padding: 15px 20px;
       margin-bottom: 20px;
       text-align: center;
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      color: rgba(255,255,255,0.8);
       transition: all 0.3s ease;
     }
-
     .current-uid:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-      border-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
     }
-
     .uid-value {
       font-weight: bold;
       color: #00ff00;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+      filter: blur(4px);
+      transition: filter 0.3s ease;
+    }
+    .current-uid:hover .uid-value {
+      filter: blur(0px);
     }
 
     .logo {
@@ -919,7 +917,6 @@
   </style>
 </head>
 <body>
-  <!-- Floating particles background -->
   <div class="particles" id="particles"></div>
 
   <div class="container">
