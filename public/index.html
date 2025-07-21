@@ -563,7 +563,7 @@
     }
 
     .watermark::before {
-      content: '✨';
+      content: ' ';
       margin-right: 8px;
       font-size: 16px;
       animation: spark 2s ease-in-out infinite;
@@ -1326,7 +1326,7 @@
           const el = document.getElementById(field);
           if (!el) return;
           if (ns === 'colors') {
-            // handled by Pickr
+            
           } else if (el.type === 'checkbox') {
             payload[ns][field] = el.checked;
           } else {
@@ -1345,7 +1345,7 @@
       .then(resp => resp.json())
       .then(res => {
         const statusEl = document.getElementById('status');
-        statusEl.textContent = '✅ Saved successfully!';
+        statusEl.textContent = '✅ success';
         statusEl.style.color = '#00ff00';
         setTimeout(() => {
           statusEl.textContent = '';
@@ -1353,7 +1353,7 @@
       })
       .catch(err => {
         const statusEl = document.getElementById('status');
-        statusEl.textContent = '❌ Failed to save';
+        statusEl.textContent = '❌ failed';
         statusEl.style.color = '#ff5555';
         console.error(err);
       });
@@ -1364,10 +1364,7 @@
         connectWithUID();
       }
     });
-
-    // --- Pickr Color Pickers ---
     let pickrs = {};
-    
     function rgbArrayToHex(arr) {
       if (!arr) return '#ffffff';
       return (
