@@ -96,8 +96,6 @@
       z-index: -1;
       animation: pulseBefore 2s infinite;
     }
-
-    /* UID Input Section */
     .uid-section {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(20px) saturate(180%);
@@ -914,6 +912,81 @@
         opacity: 0;
       }
     }
+
+    /* Tab Bar Styles */
+    .tab-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      justify-content: center;
+      background: rgba(255,255,255,0.04);
+      border-radius: 15px;
+      padding: 8px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px 28px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      outline: none;
+      position: relative;
+    }
+    .tab-btn.active, .tab-btn:focus {
+      background: linear-gradient(135deg, #111 60%, #333 100%);
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    }
+    .tab-btn:hover:not(.active) {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .tab-section {
+      display: none;
+      grid-column: 1 / -1;
+    }
+    .tab-section.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+    /* Loading Spinner Styles */
+    .loading-spinner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      margin-bottom: 30px;
+      animation: fadeIn 0.5s;
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #222;
+      border-top: 5px solid #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 18px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-text {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
@@ -926,7 +999,7 @@
           <span style="font-size: 28px; font-weight: bold; background: linear-gradient(45deg, #ffffff, #cccccc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">landen2rich</span>
           <span class="subtext" style="display: flex; align-items: center; gap: 8px; margin-top: 2px;">
             <img src="https://img.icons8.com/ios-filled/50/ffffff/discord-logo.png" alt="Discord" style="width: 18px; height: 18px; vertical-align: middle;">
-            discord.gg/landen2rich
+            discord.gg/5PWQYnDbTb
           </span>
         </div>
         <div class="status">
@@ -946,24 +1019,27 @@
       <br>
       <button class="connect-btn" onclick="connectWithUID()">🔗 Connect</button>
     </div>
+    <!-- Loading Animation -->
+    <div id="loading-spinner" class="loading-spinner" style="display: none;">
+      <div class="spinner"></div>
+      <div class="loading-text">Loading...</div>
+    </div>
 
     <div class="current-uid" id="current-uid" style="display: none;">
       Menu for UID: <span class="uid-value" id="uid-label"></span>
     </div>
 
     <form class="config-form" id="config-form">
+      <!-- Tab Bar -->
+      <div class="tab-bar">
+        <button type="button" class="tab-btn active" data-tab="aimbot">Aimbot</button>
+        <button type="button" class="tab-btn" data-tab="visuals">Visuals</button>
+        <button type="button" class="tab-btn" data-tab="triggerbot">Triggerbot</button>
+        <button type="button" class="tab-btn" data-tab="radar">Radar</button>
+        <button type="button" class="tab-btn" data-tab="colors">Colors</button>
+      </div>
       <div class="config-grid">
-        <fieldset>
-          <legend>Visuals</legend>
-          <label><input type="checkbox" id="box"> Box ESP</label>
-          <label><input type="checkbox" id="platform"> Platform ESP</label>
-          <label><input type="checkbox" id="username"> Username ESP</label>
-          <label><input type="checkbox" id="killcount"> Kill Count ESP</label>
-          <label><input type="checkbox" id="weaponesp"> Weapon ESP</label>
-          <label><input type="checkbox" id="skeleton"> Skeleton ESP</label>
-        </fieldset>
-
-        <fieldset>
+        <fieldset id="tab-aimbot" class="tab-section active">
           <legend>Aimbot</legend>
           <label><input type="checkbox" id="enable"> Enable Aimbot</label>
           <label><input type="checkbox" id="show_fov"> Show FOV Circle</label>
@@ -986,7 +1062,17 @@
           <label><input type="checkbox" id="fovarrows"> FOV Arrows</label>
         </fieldset>
 
-        <fieldset>
+        <fieldset id="tab-visuals" class="tab-section">
+          <legend>Visuals</legend>
+          <label><input type="checkbox" id="box"> Box ESP</label>
+          <label><input type="checkbox" id="platform"> Platform ESP</label>
+          <label><input type="checkbox" id="username"> Username ESP</label>
+          <label><input type="checkbox" id="killcount"> Kill Count ESP</label>
+          <label><input type="checkbox" id="weaponesp"> Weapon ESP</label>
+          <label><input type="checkbox" id="skeleton"> Skeleton ESP</label>
+        </fieldset>
+
+        <fieldset id="tab-triggerbot" class="tab-section">
           <legend>Triggerbot</legend>
           <label><input type="checkbox" id="triggerbot"> Enable Triggerbot</label>
           <label><input type="checkbox" id="triggerbot_enable"> Auto Trigger</label>
@@ -1007,7 +1093,7 @@
           </label>
         </fieldset>
 
-        <fieldset>
+        <fieldset id="tab-radar" class="tab-section">
           <legend>Radar</legend>
           <label><input type="checkbox" id="radar"> Enable Radar</label>
           <label class="slider-label">
@@ -1022,7 +1108,7 @@
           </label>
         </fieldset>
 
-        <fieldset>
+        <fieldset id="tab-colors" class="tab-section">
           <legend>Colors</legend>
           <div class="color-label">
             <span>Name Color:</span>
@@ -1062,7 +1148,7 @@
     </form>
   </div>
 
-  <div class="watermark">made by landen2rich | AI</div>
+  <div class="watermark">made by landen2rich</div>
 
   <script>
     // Floating particles animation
@@ -1121,8 +1207,14 @@
       const newUrl = new URL(window.location);
       newUrl.searchParams.set('uid', uid);
       window.history.pushState({}, '', newUrl);
-      
-      showConfigForm();
+      // Show loading spinner, hide UID section
+      document.getElementById('uid-section').style.display = 'none';
+      document.getElementById('loading-spinner').style.display = 'flex';
+      // After delay, hide spinner and show menu
+      setTimeout(() => {
+        document.getElementById('loading-spinner').style.display = 'none';
+        showConfigForm();
+      }, 1200);
     }
 
     function showConfigForm() {
@@ -1361,6 +1453,7 @@
     
     document.getElementById('uid-input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
+        e.preventDefault();
         connectWithUID();
       }
     });
@@ -1444,6 +1537,23 @@
     
     document.addEventListener('DOMContentLoaded', function() {
       initPickrs();
+      // Tab switching
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabSections = document.querySelectorAll('.tab-section');
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          // Remove active from all
+          tabBtns.forEach(b => b.classList.remove('active'));
+          tabSections.forEach(sec => sec.classList.remove('active'));
+          // Add active to selected
+          btn.classList.add('active');
+          const tab = btn.getAttribute('data-tab');
+          document.getElementById('tab-' + tab).classList.add('active');
+        });
+      });
+      // Show first tab by default (Aimbot)
+      document.querySelector('.tab-btn[data-tab="aimbot"]').classList.add('active');
+      document.getElementById('tab-aimbot').classList.add('active');
     });
   </script>
 </body>
